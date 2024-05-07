@@ -8,9 +8,9 @@ from bot.knowledgebase import KnowledgeBase
 class ChatBot():
     def __init__(self, user):
         self.kb = KnowledgeBase()
-        self.model = ChatOllama(temperature=0, model="example")
+        self.model = ChatOllama(temperature=0, model="BMS-BOT")
         self.user_name = user["name"]
-        self.tools = [self.kb.get_context]
+        # self.tools = [self.kb.get_context]
         self.chat_history = []
         # self.prompt = PromptTemplate(
         #     template="You are BMS-BOT, a friendly AI assistant for B.M.S. College of engineering. Greet the user who is {user_name} Answer all questions concisely and to the point. Chat History: {chat_history} user: {input} context: {context}",
@@ -18,7 +18,7 @@ class ChatBot():
         #     input_variables=["user_name", "input", "context"],
         # )
         self.prompt = PromptTemplate(
-            template="[INST]You are Seemanthini, a friendly AI assistant for B.M.S. College of engineering. If starting the conversation (no chat_history), greet the user who is {user_name}. Answer all questions concisely and to the point. Chat History: {chat_history} user: {input} context: {context}[/INST]",
+            template="<s>[INST]You are BMS-BOT, a friendly AI assistant for B.M.S. College of Engineering. You must assist students and teachers by answering their questions, while being helpful and honest. If starting the conversation (no chat_history), greet the user who is {user_name}. \n 1. Answer all questions concisely and to the point. \n 2. If you do not know the answer to a question, respond with \" I do not know the answer to this question, as my database is still being updated with current and accurate information \" \n\n\n\n\n\n\n Previous Chat History with the user: {chat_history}. \n\n\n\nThis is the user query you are supposed to answer. The user query: {input}. \n\n\n\n\n\n You must answer the query with the given context. The extracted context: {context} \n\n\n\n\n\n\n Your answer here:[/INST]</s> ",
             input_variables=["user_name","chat_history", "input", "context"],
         )
         self.chain = self.prompt | self.model |  StrOutputParser()
@@ -28,6 +28,7 @@ class ChatBot():
             context = self.kb.get_context(user_input)
             response =  self.chain.invoke({"user_name": self.user_name, "chat_history":str(self.chat_history), "input": user_input, "context": context})
             self.extend_chat_history(user_input, response)
+            print("chat history: ",self.chat_history)
             return response
         response =  self.chain.invoke({"user_name": self.user_name,"chat_history":str(self.chat_history), "input": user_input, "context": ""})
         self.extend_chat_history(user_input, response)
