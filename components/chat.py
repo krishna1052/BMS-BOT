@@ -5,9 +5,7 @@ from bot.chatbot import ChatBot
 def welcome_sidebar():
     with st.sidebar:
             # st.image("assets/ai_bot.jpg")
-            st.markdown(
-                "🧙‍♂️✨ Introducing CarsNodi.ai 🚗, your personal AI assistant for navigating the vast world of automobiles in India. Seamlessly integrating LLMs, CarsNodi.ai empowers users to explore and select from an extensive range of cars offered by leading manufacturers across the country. Whether you're seeking performance, comfort, or eco-friendliness, CarsNodi.ai is your trusted companion, providing expert guidance to help you find the perfect vehicle tailored to your preferences and needs.🌟"
-            )
+            st.markdown("Welcome to BMS-CHAT, an application that is here to help you with your queries. Please feel free to ask any questions and I will try to help you as best as I can.")   
             st.markdown("---")
             # st.image("assets/tw-logo.png")
             
