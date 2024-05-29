@@ -46,7 +46,7 @@ def sign_in_with_google():
         
         # col2a, col2b, col2c = st.columns([2,1,2])
         # chatbot_title.write("Welcome to BMS-BOT", )
-        st.image("assets/placeholder.jpg", use_column_width="always",)
+        st.image("assets/logo.jpg", use_column_width="always",)
     with col3b:
         google_link = st.empty()
         google_link.link_button("Sign In", auth_url, type="primary", use_container_width=True)
