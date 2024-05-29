@@ -5,7 +5,7 @@ from bot.chatbot import ChatBot
 def welcome_sidebar():
     with st.sidebar:
             # st.image("assets/ai_bot.jpg")
-            st.markdown("Welcome to BMS-CHAT, an application that is here to help you with your queries. Please feel free to ask any questions and I will try to help you as best as I can.")   
+            st.markdown("Welcome to BMS-BOT, an application that is here to help you with your queries. Please feel free to ask any questions and I will try to help you as best as I can.")   
             st.markdown("---")
             # st.image("assets/tw-logo.png")
             

@@ -8,7 +8,7 @@ from bot.knowledgebase import KnowledgeBase
 class ChatBot():
     def __init__(self, user):
         self.kb = KnowledgeBase()
-        self.model = ChatOllama(temperature=0, model="BMS-BOT")
+        self.model = ChatOllama(temperature=0, model="llama3")
         self.user_name = user["name"]
         # self.tools = [self.kb.get_context]
         self.chat_history = []
@@ -18,7 +18,7 @@ class ChatBot():
         #     input_variables=["user_name", "input", "context"],
         # )
         self.prompt = PromptTemplate(
-            template="<s>[INST]You are BMS-BOT, a friendly AI assistant for B.M.S. College of Engineering. You must assist students and teachers by answering their questions, while being helpful and honest. If starting the conversation (no chat_history), greet the user who is {user_name}. \n 1. Answer all questions concisely and to the point. \n 2. If you do not know the answer to a question, respond with \" I do not know the answer to this question, as my database is still being updated with current and accurate information \" \n\n\n\n\n\n\n Previous Chat History with the user: {chat_history}. \n\n\n\nThis is the user query you are supposed to answer. The user query: {input}. \n\n\n\n\n\n You must answer the query with the given context. The extracted context: {context} \n\n\n\n\n\n\n Your answer here:[/INST]</s> ",
+            template="<|begin_of_text|><|start_header_id|>system<|end_header_id|>You are BMS-BOT, a friendly AI assistant for B.M.S. College of Engineering. You must assist students and teachers by answering their questions, while being helpful and honest. If starting the conversation, greet the user who is {user_name}. \n 1. Answer all questions concisely and to the point. \n 2. If you do not know the answer to a question, respond with \" I do not know the answer to this question, as my database is still being updated with current and accurate information \" \n\n\n\n\n\n\n Previous Chat History with the user: {chat_history}. Use the given chathistory and the extracted context to answer your question.<|eot_id|><|start_header_id|>user<|end_header_id|>{input}\n\n\n\n\n\n The extracted context: {context}<|eot_id|><|start_header_id|>assistant<|end_header_id|> ",
             input_variables=["user_name","chat_history", "input", "context"],
         )
         self.chain = self.prompt | self.model |  StrOutputParser()

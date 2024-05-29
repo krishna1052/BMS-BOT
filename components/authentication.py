@@ -10,6 +10,7 @@ GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 GOOGLE_CALLBACK_URI = os.getenv("GOOGLE_CALLBACK_URI")
 
+
 def sign_in_with_google():
     auth_url = (
         "https://accounts.google.com/o/oauth2/v2/auth?"
@@ -18,10 +19,37 @@ def sign_in_with_google():
         f"client_id={GOOGLE_CLIENT_ID}&"
         f"redirect_uri={GOOGLE_CALLBACK_URI}"
     )
-    col1, col2, col3 = st.columns([1, 2, 1])
-    google_link = st.empty()
+    col1a, col1b, col2, col3a, col3b = st.columns([2,2,2,2,2])
+    
+    gradient_text_html = """
+<style>
+.gradient-text {
+    font-weight: bold;
+    background: -webkit-linear-gradient(left, red, orange);
+    background: linear-gradient(to right, red, orange);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+    font-size: 3em;
+}
+</style>
+<div class="gradient-text">BMS-BOT</div>
+"""
+
+    
+    
+    chatbot_title = st.empty()
+    
+    st.markdown(gradient_text_html, unsafe_allow_html=True)
+    st.write("Welcome to BMS-BOT, an application that is here to help you with your queries. Please feel free to ask any questions and I will try to help you as best as I can.")   
     with col2:
-        google_link.link_button("Sign in with Google", auth_url, type="primary", use_container_width=True)
+        
+        # col2a, col2b, col2c = st.columns([2,1,2])
+        # chatbot_title.write("Welcome to BMS-BOT", )
+        st.image("assets/placeholder.jpg", use_column_width="always",)
+    with col3b:
+        google_link = st.empty()
+        google_link.link_button("Sign In", auth_url, type="primary", use_container_width=True)
 
 @st.cache_data
 def handle_oauth_callback():
