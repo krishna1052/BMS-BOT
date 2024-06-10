@@ -22,5 +22,21 @@ To set up the project locally, follow these steps:
 
 1. Clone the repository:
       ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/krishna1052/BMS-BOT.git
+   cd BMS-BOT
+
+2. Set up the virtual environment:
+      ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+3. Install dependencies:
+      ```bash
+   pip install -r requirements.txt
+
+4. Start the backend server:
+      ```bash
+   python3 app.py
+
+## Acknowledgements
+We would like to thank BMS College of Engineering for their support and all contributors who have helped in the development of this project.
